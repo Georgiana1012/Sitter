@@ -1,0 +1,101 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-myproject-dev-141530-authRole",
+      "UnauthRoleArn": "arn:aws:iam::253511389031:role/amplify-myproject-dev-141530-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::253511389031:role/amplify-myproject-dev-141530-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-myproject-dev-141530-deployment",
+      "UnauthRoleName": "amplify-myproject-dev-141530-unauthRole",
+      "StackName": "amplify-myproject-dev-141530",
+      "StackId": "arn:aws:cloudformation:us-east-1:253511389031:stack/amplify-myproject-dev-141530/d4767060-e4ec-11ed-a548-1240d3575417",
+      "AmplifyAppId": "d3vf95djr32zqj"
+    }
+  },
+  "api": {
+    "myproject": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "API_KEY",
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 7
+            }
+          },
+          "additionalAuthenticationProviders": []
+        },
+        "GraphQLAPIIdOutput": "z67xberkrzc6xplmo2pyahnlwa",
+        "GraphQLAPIEndpointOutput": "https://sqdgxhcokvdo3dv6zu6rnluiyq.appsync-api.us-east-1.amazonaws.com/graphql",
+        "GraphQLAPIKeyOutput": "da2-ianqqxh2zben7ma3vturae5ngy"
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-myproject-dev-141530-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "logicalId": "apimyproject"
+      },
+      "lastPushTimeStamp": "2023-04-27T13:36:37.827Z",
+      "lastPushDirHash": "CqC4nrQRpsCne680A3Xmaj5Qpic="
+    }
+  },
+  "auth": {
+    "myproject96ce36d6": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false,
+      "frontendAuthConfig": {
+        "socialProviders": [],
+        "usernameAttributes": [],
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": []
+        },
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-myproject-dev-141530-deployment/amplify-cfn-templates/auth/myproject96ce36d6-cloudformation-template.json",
+        "logicalId": "authmyproject96ce36d6"
+      },
+      "lastPushTimeStamp": "2023-04-27T13:36:37.829Z",
+      "output": {
+        "UserPoolId": "us-east-1_3EvLLiglF",
+        "AppClientIDWeb": "7sptbqe566fl70r38si12110o4",
+        "AppClientID": "3a6pleuq374il97ha4u944nrrl",
+        "IdentityPoolId": "us-east-1:c85e0168-2fc0-4b19-8c76-6abee09fcf74",
+        "UserPoolArn": "arn:aws:cognito-idp:us-east-1:253511389031:userpool/us-east-1_3EvLLiglF",
+        "IdentityPoolName": "myproject96ce36d6_identitypool_96ce36d6__dev",
+        "UserPoolName": "myproject96ce36d6_userpool_96ce36d6"
+      },
+      "lastPushDirHash": "4kHMuq2W9lMhTlWlUoy0R+gWHs8="
+    }
+  },
+  "hosting": {
+    "S3AndCloudFront": {
+      "service": "S3AndCloudFront",
+      "providerPlugin": "awscloudformation",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-myproject-dev-141530-deployment/amplify-cfn-templates/hosting/template.json",
+        "logicalId": "hostingS3AndCloudFront"
+      },
+      "lastPushTimeStamp": "2023-04-27T13:36:37.830Z",
+      "output": {
+        "S3BucketSecureURL": "https://myproject-20230427143504-hostingbucket-dev.s3.amazonaws.com",
+        "WebsiteURL": "http://myproject-20230427143504-hostingbucket-dev.s3-website-us-east-1.amazonaws.com",
+        "Region": "us-east-1",
+        "HostingBucketName": "myproject-20230427143504-hostingbucket-dev"
+      },
+      "lastPushDirHash": "i8ThBV9+EalfHMrQEoBGwEqp6gE="
+    }
+  }
+}
