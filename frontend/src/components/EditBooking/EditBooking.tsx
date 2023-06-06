@@ -19,6 +19,7 @@ import {
 } from "../../app-redux/apiSlice";
 import {useParams} from "react-router-dom";
 import {createNotification, StatusOption} from "../../utils/createNotification";
+import {Auth} from "aws-amplify";
 
 export function EditBooking(): JSX.Element {
     let content: JSX.Element;
@@ -29,6 +30,16 @@ export function EditBooking(): JSX.Element {
     // const [numberOfPeople, setNumberOfPeople] = useState("");
     const [name, setName] = useState("");
     const [surname, setSurname] = useState("");
+    const [username, setUsername] = useState('');
+
+    useEffect(() => {
+        async function getUsername() {
+            const user = await Auth.currentAuthenticatedUser();
+            setUsername(user.username);
+        }
+
+        getUsername();
+    }, []);
 
     const {reservationID} = useParams();
 
@@ -55,6 +66,7 @@ export function EditBooking(): JSX.Element {
         if(date){
             const reservation: ReservationDTO ={
                 id: reservationID,
+                username: username,
                 reservationDate: date,
                 reservationHour: reservationTime,
                 reservationName: name,

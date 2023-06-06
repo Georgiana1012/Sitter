@@ -5,6 +5,7 @@ import {fetchBaseQuery} from "@reduxjs/toolkit/query";
 
 export type ReservationDTO = {
     id?: string;
+    username?: string
     reservationDate: string;
     reservationHour: string;
     reservationName: string;
@@ -24,6 +25,10 @@ export const apiSlice = createApi({
         getAllReservations: builder.query<ReservationDTO[], void>({
             query: () =>
                 `/getAll`,
+        }),
+        getReservationsForUser: builder.query<ReservationDTO[], string>({
+            query: username =>
+                `/getReservationsForUser/${username}`,
         }),
         getReservation: builder.query<ReservationDTO, number>({
             query: id =>
@@ -60,6 +65,7 @@ export const apiSlice = createApi({
 
 export const {
     useGetAllReservationsQuery,
+    useGetReservationsForUserQuery,
     useGetReservationQuery,
     useEditReservationMutation,
     useDeleteReservationMutation,

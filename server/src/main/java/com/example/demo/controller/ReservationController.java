@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Slf4j
-@CrossOrigin(origins= {"*"}, maxAge = 4800, allowCredentials = "false" )
+@CrossOrigin(origins= {"*"}, maxAge = 4800, allowCredentials = "false")
 @Controller
 @RestController
 @RequestMapping("/reservation")
@@ -33,6 +33,7 @@ public class ReservationController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 
     @GetMapping(path = "/getReservation")
     public ResponseEntity<List<Reservation>> getReservationsByPhoneNumber(@RequestBody String phoneNumber) {
@@ -81,6 +82,17 @@ public class ReservationController {
     public ResponseEntity<List<Reservation>> getAll(){
         try {
             List<Reservation> list = reservationService.findAll();
+            return new ResponseEntity<>(list, HttpStatus.OK);
+        } catch (Exception e) {
+            log.error("Cannot getAll because of: " + e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/getReservationsForUser/{username}")
+    public ResponseEntity<List<Reservation>> getReservationForUser(@PathVariable("username") String username){
+        try {
+            List<Reservation> list = reservationService.getByUsername(username);
             return new ResponseEntity<>(list, HttpStatus.OK);
         } catch (Exception e) {
             log.error("Cannot getAll because of: " + e);

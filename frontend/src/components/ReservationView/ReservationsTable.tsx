@@ -4,6 +4,7 @@ import {Th} from "@chakra-ui/react";
 import {ReservationDTO, useDeleteReservationMutation} from "../../app-redux/apiSlice";
 import {Link} from "react-router-dom";
 import {DeleteIcon, EditIcon} from "@chakra-ui/icons";
+import dayjs from "dayjs";
 
 export function ReservationsTable({reservations}: {
     reservations: ReservationDTO[];
@@ -16,7 +17,11 @@ export function ReservationsTable({reservations}: {
     content = <>
         <TableContainer>
             <Table variant='simple'>
-                <TableCaption>Your Reservations</TableCaption>
+                <TableCaption>
+                    <Link to="/booking">
+                        <Button>Create a new booking</Button>
+                    </Link>
+                </TableCaption>
                 <Thead>
                     <Tr>
                         <Th>Name</Th>
@@ -45,15 +50,16 @@ export function ReservationsTable({reservations}: {
                             )
 
                             return (
+
                                 <Tr>
                                     <Td>{reservation.reservationName}</Td>
                                     <Td>{reservation.reservationSurname}</Td>
-                                    <Td>{reservation.reservationDate}</Td>
+                                    <Td>{dayjs(reservation.reservationDate).format("d MMM YYYY")}</Td>
                                     <Td>{reservation.reservationHour}</Td>
                                     <Td>{reservation.phoneNumber}</Td>
                                     <Td>
                                         <Button onClick={handleDelete}>
-                                           <DeleteIcon/>
+                                            <DeleteIcon/>
                                         </Button>
                                     </Td>
                                     <Td>

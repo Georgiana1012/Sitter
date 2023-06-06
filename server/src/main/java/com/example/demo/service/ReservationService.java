@@ -21,43 +21,44 @@ public class ReservationService {
     private ReservationRepository reservationRepository;
 
     @Autowired
-    ModelMapper modelMapper;
+    private ModelMapper modelMapper;
 
-    public ReservationDTO convertToDTO(Reservation reservation) {
-        ReservationDTO reservationDTO = new ReservationDTO();
-
-        reservationDTO.setId(reservation.getId());
-        reservationDTO.setReservationDate(reservation.getReservationDate());
-        reservationDTO.setReservationHour(reservation.getReservationHour());
-        reservationDTO.setReservationName(reservation.getReservationName());
-        reservationDTO.setReservationSurname(reservation.getReservationSurname());
-        reservationDTO.setDeleted(reservation.getDeleted());
-        reservationDTO.setPhoneNumber(reservation.getPhoneNumber());
-
-        return reservationDTO;
-    }
+//    public ReservationDTO convertToDTO(Reservation reservation) {
+//        ReservationDTO reservationDTO = new ReservationDTO();
+//        reservationDTO = modelMapper.map(reservation,ReservationDTO.class);
+//
+////        reservationDTO.setId(reservation.getId());
+////        reservationDTO.setReservationDate(reservation.getReservationDate());
+////        reservationDTO.setReservationHour(reservation.getReservationHour());
+////        reservationDTO.setReservationName(reservation.getReservationName());
+////        reservationDTO.setReservationSurname(reservation.getReservationSurname());
+////        reservationDTO.setDeleted(reservation.getDeleted());
+////        reservationDTO.setPhoneNumber(reservation.getPhoneNumber());
+////        reservationDTO.setUsername(reservation.getUsername());
+//
+//        return reservationDTO;
+//    }
 
     public ReservationDTO convertEntityToDTO(Reservation entity) {
-        var dto = new ReservationDTO();
-        dto = modelMapper.map(entity, ReservationDTO.class);
-        return dto;
+        return modelMapper.map(entity, ReservationDTO.class);
     }
 
     public Reservation convertToEntity(ReservationDTO dto) {
-        Reservation reservation = new Reservation();
-        reservation.setId(dto.getId());
-        reservation.setReservationDate(dto.getReservationDate());
-        reservation.setReservationHour(dto.getReservationHour());
-        reservation.setReservationName(dto.getReservationName());
-        reservation.setReservationSurname(dto.getReservationSurname());
-        reservation.setDeleted(dto.getDeleted());
-        reservation.setPhoneNumber(dto.getPhoneNumber());
+//        Reservation reservation = new Reservation();
+//        reservation.setId(dto.getId());
+//        reservation.setReservationDate(dto.getReservationDate());
+//        reservation.setReservationHour(dto.getReservationHour());
+//        reservation.setReservationName(dto.getReservationName());
+//        reservation.setReservationSurname(dto.getReservationSurname());
+//        reservation.setDeleted(dto.getDeleted());
+//        reservation.setPhoneNumber(dto.getPhoneNumber());
+//        reservation.setUsername(dto.getUsername());
 
-        return reservation;
+        return modelMapper.map(dto,Reservation.class);
     }
 
     public List<ReservationDTO> convertListToDTO(List<Reservation> entityList) {
-        return entityList.stream().map(this::convertToDTO).collect(Collectors.toList());
+        return entityList.stream().map(this::convertEntityToDTO).collect(Collectors.toList());
     }
 
     public Reservation save(ReservationDTO dto) {
@@ -76,7 +77,6 @@ public class ReservationService {
             reservation.setPhoneNumber(dto.getPhoneNumber());
             return reservationRepository.save(reservation);
         }
-
         return null;
     }
 
@@ -89,7 +89,15 @@ public class ReservationService {
     }
 
     public ReservationDTO findDtoById(Long id) {
-        return convertToDTO(findById(id));
+        return convertEntityToDTO(findById(id));
+    }
+
+    public List<Reservation> getByUsername(String username) {
+        Optional<List<Reservation>> optional = reservationRepository.findByUsername(username);
+        if(optional.isPresent()) {
+            return optional.get();
+        }
+        return new ArrayList<>();
     }
 
     public List<Reservation> getAllByPhoneNumber(String phoneNumber) {

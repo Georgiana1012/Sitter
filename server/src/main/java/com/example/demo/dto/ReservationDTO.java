@@ -13,6 +13,7 @@ import java.util.Date;
 public class ReservationDTO implements Serializable {
 
     private Long id;
+    private String username;
     private Date reservationDate;
     private String reservationHour;
     private String reservationName;

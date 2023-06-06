@@ -21,6 +21,9 @@ public class Reservation {
     @SequenceGenerator(name = "reservations_id_seq", sequenceName = "reservations_id_seq", allocationSize = 1)
     private Long id;
 
+    @Column(name = "USERNAME")
+    private String username;
+
     @Column(name = "RESERVATION_DATE")
     private Date reservationDate;
 
